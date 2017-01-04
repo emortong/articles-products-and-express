@@ -101,3 +101,49 @@ describe('DELETE /products/:id', () => {
       })
   })
 })
+
+describe('GET /products', () => {
+  it('directs the user to /products', (done) => {
+  request(app)
+    .get('/products')
+    .end((err, res) => {
+        if(err) {
+          throw new Error(err);
+        }
+        expect(res.text).to.be.a('string')
+        expect('Content-Type', 'text/html')
+        done()
+      })
+  })
+})
+
+describe('GET /products/:id/edit', () => {
+  it('directs the user to /products', (done) => {
+  request(app)
+    .get('/products/1/edit')
+    .end((err, res) => {
+        if(err) {
+          throw new Error(err);
+        }
+        expect(res.text).to.be.a('string')
+        expect('Content-Type', 'text/html')
+        done()
+      })
+  })
+})
+
+describe('GET /products/new', () => {
+  it('directs the user to /products', (done) => {
+  request(app)
+    .get('/products/new')
+    .end((err, res) => {
+        if(err) {
+          throw new Error(err);
+        }
+        expect(res.text).to.be.a('string')
+        expect('Content-Type', 'text/html')
+        done()
+      })
+  })
+})
+
