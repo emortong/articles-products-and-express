@@ -8,9 +8,10 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}))
 
+app.set('view engine', '.hbs');
+
 app.engine('.hbs', exphbs({
   extname:'.hbs',
-  defaultLayout:'main',
 }))
 
 app.use('/products', products);
