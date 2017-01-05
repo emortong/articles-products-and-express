@@ -3,12 +3,12 @@
   <form name="form" action="/products/{{data.id}}" method="POST" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="_method" value="PUT">
     Id: <br>
-    <input type="text" name="id" value="{{data.id}}"><br>
+    <input type="text" name="id" value="{{data.id}}" class="box"><br>
     Name: <br>
-    <input type="text" name="name" value="{{data.name}}"><br>
+    <input type="text" name="name" value="{{data.name}}" class="box"><br>
     Price: <br>
-    <input type="text" name="price" value="{{data.price}}"><br>
+    <input type="text" name="price" value="{{data.price}}" class="box"><br>
     Inventory: <br>
-    <input type="text" name="inventory" value="{{data.inventory}}"><br>
+    <input type="text" name="inventory" value="{{data.inventory}}" class="box"><br>
     <input type="submit" value="Submit" id="submit">
   </form>

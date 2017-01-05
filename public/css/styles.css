@@ -1,0 +1,42 @@
+
+body {
+  background-color: #9BD3F8;
+  color: black;
+  font-family: lato;
+  text-align: center;
+}
+
+form {
+  font-size: 20px;
+}
+input {
+  font-size: 18px;
+  text-align: center;
+}
+.container {
+  text-align: center;
+  margin: auto;
+  width: 90%;
+}
+
+.box {
+  width: 200px;
+  height: 40px;
+}
+
+#submit {
+  width: 200px;
+  height: 40px;
+  margin-top: 12px;
+  background-color: #CA6203;
+  border: none;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+.products {
+  display: inline-block;
+  margin: 0px 50px;
+}

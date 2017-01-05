@@ -1,8 +1,9 @@
 <h1>Products Index</h1>
 
-<ul>
 {{#each data}}
-  <h3>{{this.name}}</h3>
-  <p>price: {{this.price}}, {{this.inventory}} in stock</p>
+<div class="products">
+  <h2>{{this.name}}</h2>
+  <h3>price: {{this.price}}</h3>
+  <h3> {{this.inventory}} in stock</h3>
+</div>
 {{/each}}
-</ul>

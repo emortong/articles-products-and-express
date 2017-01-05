@@ -8,6 +8,7 @@ var methodOverride = require('method-override')
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static('public'));
 
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -22,6 +23,7 @@ app.set('view engine', '.hbs');
 
 app.engine('.hbs', exphbs({
   extname:'.hbs',
+  defaultLayout:'main',
 }))
 
 app.use('/products', products);
