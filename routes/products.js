@@ -13,6 +13,12 @@ const validateReq = (req,res,next) => {
   }
 }
 
+
+router.route('/new')
+    .get((req,res) => {
+      res.render('templates/products/new')
+    })
+
 router.route('/')
   .post(validateReq, (req,res) => {
       numId++
@@ -27,38 +33,48 @@ router.route('/')
     res.redirect('/products');
   })
   .get((req,res) => {
-    res.render('templates/products/index')
+    res.render('templates/products/index', {
+      data:data.all()
+    })
   })
 
 router.route('/:id')
   .put((req,res) => {
+    console.log('hello');
     let successful = data.editById(req.body.id, req.body)
 
     if(successful) {
-      res.redirect(200, '/products/1') // change 1 to :id
+      res.redirect(`/products/${req.params.id}`) //add a 200
+      console.log(data.all());
     } else if(successful === false) {
-      res.redirect(500, '/products/1/edit') // recheck status change 1 to :id
+      res.redirect(`/products/${req.params.id}/edit`) // add a 500 status
     }
   })
   .delete((req,res) => {
     let successful = data.deleteById(req.params.id)
     if(successful) {
       console.log('yes');
-      res.redirect(200, '/products')
+      res.redirect('/products') // add a 200
     } else if(successful === false) {
-      res.redirect(500, '/products/1') // recheck status change 1 to id
+      res.redirect(`/products/${req.params.id}`) // add a 500
     }
+  })
+  .get((req,res) => {
+    res.render('templates/products/item', {
+      data: data.getById(req.params.id)
+    })
   })
 
   router.route('/:id/edit')
     .get((req,res) => {
-      res.render('templates/products/edit')
+      res.render('templates/products/edit', {
+        data: data.getById(req.params.id)
+      })
     })
 
-  router.route('/new')
-    .get((req,res) => {
-      res.render('templates/products/new')
-    })
+
+
+
 
 module.exports = router;
 

@@ -11,8 +11,14 @@ const validateReq = (req,res,next) => {
   }
 }
 
+router.route('/new')
+    .get((req,res) => {
+      res.render('templates/articles/new')
+    })
+
 router.route('/')
   .post(validateReq, (req,res) => {
+    console.log(req.body);
     let urlTitle = encodeURIComponent(req.body.title);
     let artData = {
       title: req.body.title,
@@ -25,35 +31,44 @@ router.route('/')
     res.redirect('/articles');
   })
   .get((req,res) => {
-    res.render('templates/articles/index')
+    res.render('templates/articles/index', {
+      data:data.all()
+    })
   })
 
 router.route('/:title')
   .put((req,res) => {
+    console.log('hi');
+    console.log(req.body.title, req.body);
     let successful = data.editByTitle(req.body.title, req.body)
+    console.log(successful)
     if(successful) {
-      res.redirect(200, '/article/:title') // change 1 to :id
+      res.redirect(`/articles/${req.params.title}`) // add 200
     } else if(successful === false) {
-      res.redirect(500, '/articles/:title/edit') // recheck status change 1 to :id
+      res.redirect(`/articles/${req.params.title}/edit`) // radd 500
     }
   })
   .delete((req,res) => {
-    let successful = data.deleteById(req.params.title)
+    let successful = data.deleteByTitle(req.params.title)
+    console.log(successful);
     if(successful) {
-      res.redirect(200, '/articles')
+      res.redirect('/articles') // add 200
     } else if(successful === false) {
-      res.redirect(500, '/articles/:title') // recheck status change 1 to id
+      res.redirect(`/articles/${rec.params.title}`) // add 500
     }
   })
+  .get((req,res) => {
+  res.render('templates/articles/item', {
+    data: data.getByTitle(req.params.title)
+  })
+})
 
 router.route('/:title/edit')
     .get((req,res) => {
-      res.render('templates/articles/edit')
+      res.render('templates/articles/edit', {
+        data: data.getByTitle(req.params.title)
+      })
     })
 
-  router.route('/new')
-    .get((req,res) => {
-      res.render('templates/articles/new')
-    })
 
 module.exports = router;

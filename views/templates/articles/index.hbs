@@ -1,1 +1,9 @@
 <h1>Articles Index</h1>
+
+<ul>
+{{#each data}}
+  <h1>{{this.title}}</h1>
+  <p>by: {{this.author}}</p>
+  <p>{{this.body}}</p>
+{{/each}}
+</ul>

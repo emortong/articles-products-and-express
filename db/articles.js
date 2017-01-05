@@ -21,6 +21,7 @@ module.exports = (function() {
   }
 
   function _editByTitle(title, toEdit) {
+    console.log('hello');
     let objToEdit = _getByTitle(title);
     console.log('objToEdit: ', objToEdit);
     let successful;
@@ -57,7 +58,7 @@ module.exports = (function() {
     add: _add,
     getByTitle: _getByTitle,
     editByTitle: _editByTitle,
-    _deleteByTitle: _deleteByTitle,
+    deleteByTitle: _deleteByTitle,
   }
 
 })();
