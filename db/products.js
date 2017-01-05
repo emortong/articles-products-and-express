@@ -23,16 +23,19 @@
   function _editById(id, toEdit) {
     let objToEdit = _getById(id);
     let successful;
-    console.log('objToEdit', objToEdit);
-    if(toEdit.hasOwnProperty('name')) {
-      objToEdit.name = toEdit.name;
-      successful = true;
-    } else if(toEdit.hasOwnProperty('price')) {
-      objToEdit.price = toEdit.price;
-      successful = true
-    } else if(toEdit.hasOwnProperty('inventory')) {
-      objToEdit.inventory = toEdit.inventory;
-      successful = true;
+    if(objToEdit !== undefined) {
+      if(toEdit.hasOwnProperty('name')) {
+        objToEdit.name = toEdit.name;
+        successful = true;
+      } else if(toEdit.hasOwnProperty('price')) {
+        objToEdit.price = toEdit.price;
+        successful = true
+      } else if(toEdit.hasOwnProperty('inventory')) {
+        objToEdit.inventory = toEdit.inventory;
+        successful = true;
+      } else {
+        successful = false;
+      }
     } else {
       successful = false;
     }

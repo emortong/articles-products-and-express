@@ -33,9 +33,8 @@ router.route('/')
 router.route('/:id')
   .put((req,res) => {
     let successful = data.editById(req.body.id, req.body)
-    console.log(data.all());
+
     if(successful) {
-      console.log('hi');
       res.redirect(200, '/products/1') // change 1 to :id
     } else if(successful === false) {
       res.redirect(500, '/products/1/edit') // recheck status change 1 to :id
