@@ -87,16 +87,15 @@ describe('DELETE /products/:id', () => {
         done()
       })
   })
-  it('redirects to /products/:id if unsuccessful', (done) => {
+  it('redirects to /products/new if unsuccessful', (done) => {
     request(app)
-      .delete('/products/1')
+      .delete('/products/800v')
       .type('form')
-      .send({})
       .end((err, res) => {
         if(err) {
           throw new Error(err);
         }
-        expect(res.header.location).to.equal('/products/1')
+        expect(res.header.location).to.equal('/products/new')
         done()
       })
   })

@@ -51,12 +51,13 @@ router.route('/:id')
     }
   })
   .delete((req,res) => {
+
     let successful = data.deleteById(req.params.id)
     if(successful) {
       console.log('yes');
       res.redirect('/products') // add a 200
     } else if(successful === false) {
-      res.redirect(`/products/${req.params.id}`) // add a 500
+      res.redirect(`/products/new`) // add a 500
     }
   })
   .get((req,res) => {

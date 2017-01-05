@@ -8,6 +8,7 @@
 
   function _add(obj) {
     _data.push(obj)
+    console.log(_data);
   }
 
   function _getById(id) {

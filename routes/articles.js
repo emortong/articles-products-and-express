@@ -11,13 +11,22 @@ const validateReq = (req,res,next) => {
   }
 }
 
+const headerValidation = (req,res,next) => {
+  if(req.httpVersion === '1.1') {
+    next();
+  } else {
+    res.send({error: 'bad headers'})
+  }
+
+}
+
 router.route('/new')
     .get((req,res) => {
       res.render('templates/articles/new')
     })
 
 router.route('/')
-  .post(validateReq, (req,res) => {
+  .post(headerValidation, validateReq, (req,res) => {
     console.log(req.body);
     let urlTitle = encodeURIComponent(req.body.title);
     let artData = {
@@ -30,14 +39,14 @@ router.route('/')
     console.log(data.all())
     res.redirect('/articles');
   })
-  .get((req,res) => {
-    res.render('templates/articles/index', {
+  .get(headerValidation, (req,res) => {
+      res.render('templates/articles/index', {
       data:data.all()
     })
   })
 
 router.route('/:title')
-  .put((req,res) => {
+  .put(headerValidation, (req,res) => {
     console.log('hi');
     console.log(req.body.title, req.body);
     let successful = data.editByTitle(req.body.title, req.body)
@@ -48,23 +57,23 @@ router.route('/:title')
       res.redirect(`/articles/${req.params.title}/edit`) // radd 500
     }
   })
-  .delete((req,res) => {
+  .delete(headerValidation, (req,res) => {
     let successful = data.deleteByTitle(req.params.title)
     console.log(successful);
     if(successful) {
       res.redirect('/articles') // add 200
     } else if(successful === false) {
-      res.redirect(`/articles/${rec.params.title}`) // add 500
+      res.redirect(`/articles/${req.params.title}`) // add 500
     }
   })
-  .get((req,res) => {
+  .get(headerValidation, (req,res) => {
   res.render('templates/articles/item', {
     data: data.getByTitle(req.params.title)
   })
 })
 
 router.route('/:title/edit')
-    .get((req,res) => {
+    .get(headerValidation, (req,res) => {
       res.render('templates/articles/edit', {
         data: data.getByTitle(req.params.title)
       })
