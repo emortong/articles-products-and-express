@@ -25,18 +25,20 @@ module.exports = (function() {
     let successful;
     if(objToEdit !== undefined) {
       if(toEdit.hasOwnProperty('body')) {
+        console.log('im in body');
         objToEdit.body = toEdit.body;
         successful = true
-      } else if(toEdit.hasOwnProperty('author')) {
+      }
+      if(toEdit.hasOwnProperty('author')) {
+        console.log('im in author');
         objToEdit.author = toEdit.author;
         successful = true;
-      } else {
-        successful = false;
       }
+
     } else {
       successful = false;
     }
-    return successful
+    return successful;
   }
 
   function _deleteByTitle(title) {

@@ -1,9 +1,16 @@
 <h1>Articles Index</h1>
 
-<ul>
+<div class="backBtn">
+  <a href="/articles/new" class="back">New</a>
+</div>
+
 {{#each data}}
-  <h1>{{this.title}}</h1>
-  <p>by: {{this.author}}</p>
-  <p>{{this.body}}</p>
+<a href="/articles/{{this.urlTitle}}">
+  <div class="products">
+    <h1>{{this.title}}</h1>
+    <p>by: {{this.author}}</p>
+    <p>{{this.body}}</p>
+  </div>
+</a>
 {{/each}}
-</ul>
+

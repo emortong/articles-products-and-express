@@ -28,14 +28,14 @@
       if(toEdit.hasOwnProperty('name')) {
         objToEdit.name = toEdit.name;
         successful = true;
-      } else if(toEdit.hasOwnProperty('price')) {
+      }
+      if(toEdit.hasOwnProperty('price')) {
         objToEdit.price = toEdit.price;
         successful = true
-      } else if(toEdit.hasOwnProperty('inventory')) {
+      }
+      if(toEdit.hasOwnProperty('inventory')) {
         objToEdit.inventory = toEdit.inventory;
         successful = true;
-      } else {
-        successful = false;
       }
     } else {
       successful = false;

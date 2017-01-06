@@ -1,9 +1,15 @@
 <h1>Products Index</h1>
 
-{{#each data}}
-<div class="products">
-  <h2>{{this.name}}</h2>
-  <h3>price: {{this.price}}</h3>
-  <h3> {{this.inventory}} in stock</h3>
+<div class="backBtn">
+  <a href="/products/new" class="back">New</a>
 </div>
+
+{{#each data}}
+<a href="/products/{{this.id}}">
+  <div class="products">
+    <h2>{{this.name}}</h2>
+    <h3>price: {{this.price}}</h3>
+    <h3> {{this.inventory}} in stock</h3>
+  </div>
+</a>
 {{/each}}

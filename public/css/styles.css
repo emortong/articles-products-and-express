@@ -32,11 +32,39 @@ input {
   border: none;
 }
 
-h2 {
-  margin-top: 50px;
+h1 {
+  font-size: 50px;
 }
+
 
 .products {
   display: inline-block;
   margin: 0px 50px;
+  background-color: white;
+  width: 230px;
+  margin-top: 50px;
+  color: black;
 }
+
+.products h2 {
+  padding-bottom: 20px;
+  font-size: 35px;
+  margin-top: 9px;
+}
+
+.backBtn {
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #CA6203;
+  width: 100px;
+  height: 30px;
+  padding: 5px;
+}
+
+.back {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+
