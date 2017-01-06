@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars')
 const articles = require('./routes/articles');
 const products = require('./routes/products');
+const home = require('./routes/home');
 const bodyParser = require('body-parser');
 var methodOverride = require('method-override')
 
@@ -28,7 +29,7 @@ app.engine('.hbs', exphbs({
 
 app.use('/products', products);
 app.use('/articles', articles)
-
+app.use('/', home);
 
 
 if(!module.parent) {

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../db/articles.js');
+const fs = require('fs')
 
 const validateReq = (req,res,next) => {
   let x = req.body;
