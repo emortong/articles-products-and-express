@@ -25,12 +25,10 @@ module.exports = (function() {
     let successful;
     if(objToEdit !== undefined) {
       if(toEdit.hasOwnProperty('body')) {
-        console.log('im in body');
         objToEdit.body = toEdit.body;
         successful = true
       }
       if(toEdit.hasOwnProperty('author')) {
-        console.log('im in author');
         objToEdit.author = toEdit.author;
         successful = true;
       }
@@ -51,7 +49,6 @@ module.exports = (function() {
       return false;
     }
   }
-
 
   return {
     all: _all,

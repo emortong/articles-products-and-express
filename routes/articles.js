@@ -18,8 +18,13 @@ router.route('/')
       author: req.body.author,
       urlTitle: urlTitle,
     }
+    console.log(artData);
     data.add(artData);
-    res.redirect('/articles');
+    if(artData.title === '' || artData.body === '' || artData.author === '' ||artData.title === undefined || artData.body === undefined || artData.author === undefined) {
+      res.redirect('/articles/new')
+    } else {
+      res.redirect('/articles');
+    }
   })
   .get(mw.analyticsTracker, mw.headerValidation, (req,res) => {
       res.render('templates/articles/index', {
