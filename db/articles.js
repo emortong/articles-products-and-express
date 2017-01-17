@@ -1,53 +1,28 @@
+const db = require('../requirements/requirements.js');
+
 module.exports = (function() {
 
-  let _data = [];
-
   function _all() {
-    return _data
+    return db.query('SELECT * FROM articles')
   }
 
   function _add(obj) {
-    _data.push(obj)
+    return db.query('INSERT INTO articles (title, body, author, urlTitle) values($1, $2, $3, $4)',
+      [obj.title, obj.body, obj.author, obj.urlTitle])
   }
 
   function _getByTitle(title) {
-    let toReturn;
-    _data.forEach((x) => {
-      if(x.title === title) {
-        toReturn = x;
-      }
-    })
-    return toReturn
+    return db.query('SELECT * FROM articles WHERE title = $1', [title]);
   }
 
-  function _editByTitle(title, toEdit) {
-    let objToEdit = _getByTitle(title);
-    let successful;
-    if(objToEdit !== undefined) {
-      if(toEdit.hasOwnProperty('body')) {
-        objToEdit.body = toEdit.body;
-        successful = true
-      }
-      if(toEdit.hasOwnProperty('author')) {
-        objToEdit.author = toEdit.author;
-        successful = true;
-      }
-
-    } else {
-      successful = false;
-    }
-    return successful;
+  function _editByTitle(toEdit) {
+    console.log(toEdit);
+    return db.query('UPDATE articles SET title = $1, body = $2, author = $3 WHERE title = $4',
+      [toEdit.title, toEdit.body, toEdit.author, toEdit.title])
   }
 
   function _deleteByTitle(title) {
-    let toDelete = _getByTitle(title);
-    let index = _data.indexOf(toDelete);
-    if(index !== -1) {
-      _data.splice(index, 1)
-      return true;
-    } else {
-      return false;
-    }
+    return db.query('DELETE FROM articles WHERE title = $1', [title]);
   }
 
   return {

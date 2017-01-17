@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/emortong/articles-products-and-express#readme",
   "dependencies": {
+    "bluebird": "^3.4.7",
     "express": "^4.14.0",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "pg-promise": "^5.5.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

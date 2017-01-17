@@ -4,6 +4,7 @@ const data = require('../db/articles.js');
 const mw = require('../middleware/middleware.js')
 const fs = require('fs')
 
+
 router.route('/new')
     .get((req,res) => {
       res.render('templates/articles/new')
@@ -16,58 +17,78 @@ router.route('/')
       title: req.body.title,
       body: req.body.body,
       author: req.body.author,
-      urlTitle: urlTitle,
+      urltitle: urltitle,
     }
-    console.log(artData);
-    data.add(artData);
-    if(artData.title === '' || artData.body === '' || artData.author === '' ||artData.title === undefined || artData.body === undefined || artData.author === undefined) {
-      res.redirect('/articles/new')
-    } else {
-      res.redirect('/articles');
-    }
+    data.add(artData)
+      .then( articles => {
+        res.redirect('/articles')
+      })
+      .catch( e => {
+        res.redirect('/articles/new');
+      })
   })
   .get(mw.analyticsTracker, mw.headerValidation, (req,res) => {
-      res.render('templates/articles/index', {
-      data:data.all()
+      data.all()
+      .then( articles => {
+        console.log(articles);
+        res.render('templates/articles/index', {articles})
     })
   })
 
 router.route('/:title')
   .put(mw.analyticsTracker, mw.headerValidation, (req,res) => {
-    let successful = data.editByTitle(req.body.title, req.body)
-    if(successful) {
-      res.redirect(`/articles/${req.params.title}`) // add 200
-    } else if(successful === false) {
-      res.redirect(`/articles/${req.params.title}/edit`) // radd 500
+    let toEdit = {
+      title: req.body.title,
+      body: req.body.body,
+      author: req.body.author
     }
+    data.editByTitle(toEdit)
+      .then( articles => {
+        res.redirect(`/articles/${req.params.title}`)
+      })
+      .catch( e => {
+        res.redirect(`/articles/${req.params.title}/edit`)
+      })
   })
   .delete(mw.analyticsTracker, mw.headerValidation, (req,res) => {
-    let successful = data.deleteByTitle(req.params.title)
-    if(successful) {
-      res.redirect('/articles') // add 200
-    } else if(successful === false) {
-      res.redirect(`/articles/${req.params.title}`) // add 500
-    }
+    data.deleteByTitle(req.params.title)
+      .then( articles => {
+        console.log(articles);
+        if(articles !== undefined) {
+          res.redirect('/articles')
+        } else {
+          res.redirect(`/articles/${req.params.title}`)
+        }
+      })
+      .catch( e => {
+        console.error(e)
+      })
   })
   .get(mw.analyticsTracker, mw.headerValidation, (req,res) => {
-    if(data.getByTitle(req.params.title) !== undefined) {
-      res.render('templates/articles/item', {
-        data: data.getByTitle(req.params.title)
-      })
-    } else {
-      res.render(`templates/404`)
-    }
+      data.getByTitle(req.params.title)
+        .then( articles => {
+          articles = articles[0];
+          res.render('templates/articles/item', {articles})
+        })
+        .catch( e => {
+          res.render(`templates/404`)
+        })
 })
 
 router.route('/:title/edit')
   .get(mw.analyticsTracker, mw.headerValidation, (req,res) => {
-    if(data.getByTitle(req.params.title) !== undefined) {
-      res.render('templates/articles/edit', {
-        data: data.getByTitle(req.params.title)
+    data.getByTitle(req.params.title)
+      .then( articles => {
+        articles = articles[0]
+        if(articles !== undefined) {
+          res.render('templates/articles/edit', {articles})
+        } else {
+          res.render(`templates/404`)
+        }
       })
-    } else {
-      res.render(`templates/404`)
-    }
+      .catch( e => {
+        console.error(e);
+      })
   })
 
 module.exports = router;

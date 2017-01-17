@@ -1,0 +1,6 @@
+GET /articles Mon Jan 16 2017 18:24:29 GMT-1000 (TAHT)
+DELETE /articles/hello Mon Jan 16 2017 18:24:57 GMT-1000 (TAHT)
+DELETE /articles/hello Mon Jan 16 2017 18:25:33 GMT-1000 (TAHT)
+DELETE /articles/hello Mon Jan 16 2017 18:25:53 GMT-1000 (TAHT)
+GET /articles Mon Jan 16 2017 18:25:54 GMT-1000 (TAHT)
+GET /articles Mon Jan 16 2017 18:26:00 GMT-1000 (TAHT)
