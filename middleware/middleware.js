@@ -38,31 +38,31 @@ module.exports = (function() {
     let log = `${method} ${uri} ${timestamp}\n`;
 
     fs.readdir('./logs', (err, files) => {
-        if (err) throw err;
+        // if (err) throw err;
 
-        let fileNameSub = fileName.substring(0,10)
-         if(files.length === 0) {
-          let fileWriteStream = fs.createWriteStream(`./logs/${fileName}`);
+        // let fileNameSub = fileName.substring(0,10)
+        //  if(files.length === 0) {
+        //   let fileWriteStream = fs.createWriteStream(`./logs/${fileName}`);
 
-            fs.writeFile(`./logs/${fileName}`, log, function (err) {
-              if (err) return console.log(err);
-            });
-         }
+        //     fs.writeFile(`./logs/${fileName}`, log, function (err) {
+        //       if (err) return console.log(err);
+        //     });
+        //  }
 
-        files.forEach((file) => {
-          fileSub = file.substring(0,10);
-          if(fileSub !== fileNameSub) {
-            let fileWriteStream = fs.createWriteStream(`./logs/${fileName}`);
+        // files.forEach((file) => {
+        //   fileSub = file.substring(0,10);
+        //   if(fileSub !== fileNameSub) {
+        //     let fileWriteStream = fs.createWriteStream(`./logs/${fileName}`);
 
-            fs.writeFile(`./logs/${fileName}`, log, function (err) {
-              if (err) return console.log(err);
-            });
-          } else if(fileSub === fileNameSub) {
-            fs.appendFile(`./logs/${file}`, log, function (err) {
-              if (err) return console.log(err);
-            });
-          }
-        })
+        //     fs.writeFile(`./logs/${fileName}`, log, function (err) {
+        //       if (err) return console.log(err);
+        //     });
+        //   } else if(fileSub === fileNameSub) {
+        //     fs.appendFile(`./logs/${file}`, log, function (err) {
+        //       if (err) return console.log(err);
+        //     });
+        //   }
+        // })
       next();
       });
   }

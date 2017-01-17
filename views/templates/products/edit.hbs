@@ -1,14 +1,14 @@
 
 <h1>Edit Product</h1>
-  <form name="form" action="/products/{{data.id}}" method="POST" enctype="application/x-www-form-urlencoded">
+  <form name="form" action="/products/{{products.id}}" method="POST" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="_method" value="PUT">
     Id: <br>
-    <input type="text" name="id" value="{{data.id}}" class="box"><br>
+    <input type="text" name="id" value="{{products.id}}" class="box"><br>
     Name: <br>
-    <input type="text" name="name" value="{{data.name}}" class="box"><br>
+    <input type="text" name="name" value="{{products.name}}" class="box"><br>
     Price: <br>
-    <input type="text" name="price" value="{{data.price}}" class="box"><br>
+    <input type="text" name="price" value="{{products.price}}" class="box"><br>
     Inventory: <br>
-    <input type="text" name="inventory" value="{{data.inventory}}" class="box"><br>
+    <input type="text" name="inventory" value="{{products.inventory}}" class="box"><br>
     <input type="submit" value="Submit" id="submit">
   </form>

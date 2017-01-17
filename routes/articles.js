@@ -30,7 +30,6 @@ router.route('/')
   .get(mw.analyticsTracker, mw.headerValidation, (req,res) => {
       data.all()
       .then( articles => {
-        console.log(articles);
         res.render('templates/articles/index', {articles})
     })
   })
@@ -53,7 +52,6 @@ router.route('/:title')
   .delete(mw.analyticsTracker, mw.headerValidation, (req,res) => {
     data.deleteByTitle(req.params.title)
       .then( articles => {
-        console.log(articles);
         if(articles !== undefined) {
           res.redirect('/articles')
         } else {

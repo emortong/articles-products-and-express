@@ -16,7 +16,6 @@ module.exports = (function() {
   }
 
   function _editByTitle(toEdit) {
-    console.log(toEdit);
     return db.query('UPDATE articles SET title = $1, body = $2, author = $3 WHERE title = $4',
       [toEdit.title, toEdit.body, toEdit.author, toEdit.title])
   }

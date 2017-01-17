@@ -1,57 +1,27 @@
+const db = require('../requirements/requirements.js');
+
  module.exports = (function() {
 
-  let _data = [];
-
   function _all() {
-    return _data;
+    return db.query('SELECT * FROM products')
   }
 
   function _add(obj) {
-    _data.push(obj)
-    console.log(_data);
+    return db.query('INSERT INTO products (name, price, inventory) values($1, $2, $3)',
+      [obj.name, obj.price, obj.inventory])
   }
 
   function _getById(id) {
-    let toReturn;
-    _data.forEach((x) => {
-      if(x.id.toString() === id) {
-        toReturn = x;
-      }
-    })
-    return toReturn
+    return db.query('SELECT * FROM products WHERE id = $1', [id]);
   }
 
-  function _editById(id, toEdit) {
-    let objToEdit = _getById(id);
-    let successful;
-    if(objToEdit !== undefined) {
-      if(toEdit.hasOwnProperty('name')) {
-        objToEdit.name = toEdit.name;
-        successful = true;
-      }
-      if(toEdit.hasOwnProperty('price')) {
-        objToEdit.price = toEdit.price;
-        successful = true
-      }
-      if(toEdit.hasOwnProperty('inventory')) {
-        objToEdit.inventory = toEdit.inventory;
-        successful = true;
-      }
-    } else {
-      successful = false;
-    }
-    return successful
+  function _editById(toEdit) {
+    return db.query('UPDATE products SET name = $2, price = $3, inventory = $4 WHERE id = $1',
+      [toEdit.id, toEdit.name, toEdit.price, toEdit.inventory])
   }
 
   function _deleteById(id) {
-    let toDelete = _getById(id);
-    let index = _data.indexOf(toDelete);
-    if(index !== -1) {
-      _data.splice(index, 1)
-      return true;
-    } else {
-      return false;
-    }
+    return db.query('DELETE FROM products WHERE id = $1', [id]);
   }
 
   return {
